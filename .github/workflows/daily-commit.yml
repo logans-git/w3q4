@@ -1,0 +1,26 @@
+name: Daily Commit (24f3002267@ds.study.iitm.ac.in)
+
+on:
+  schedule:
+    - cron: "15 5 * * *"   # Runs every day at 05:15 UTC
+  workflow_dispatch:         # Lets you run it manually
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Edit file for daily update (24f3002267@ds.study.iitm.ac.in)
+        run: |
+          echo "Daily update: $(date)" >> daily-log.txt
+
+      - name: Commit changes
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "24f3002267@ds.study.iitm.ac.in"
+          git add .
+          git commit -m "Automated daily update"
+          git push
